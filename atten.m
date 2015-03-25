@@ -65,7 +65,7 @@ function varargout          = atten(thick, depth_inc, temp, H, Cl, NH4, vol_frac
 %   See also HFCOND, HFCONDPROP and LOOYENGA.
 % 
 % Joe MacGregor, joemac@ig.utexas.edu
-% Last updated: 02/25/15
+% Last updated: 03/25/15
 
 if ~any(nargin == [8 9 13])
     error('atten:nargin', 'Incorrect number of inputs (must be 8, 9 or 13).')
@@ -164,7 +164,7 @@ end
 
 permitt_vacuum              = 8.85418782e-12; % permittivity of free space, F/m
 speed_light                 = 299792458; % speed of light in the vacuum, m/s
-cond_atten_conv             = (1e4 * log10(exp(1))) ./ (sqrt(looyenga(vol_frac, hfcp.permitt_ice, 1)) .* (permitt_vacuum * speed_light)); % (dB/km*M)
+cond_atten_conv             = (1e4 * log10(exp(1))) ./ (sqrt(looyenga(vol_frac, (hfcp.permitt_ice .* ones(size(vol_frac))), ones(size(vol_frac)))) .* (permitt_vacuum * speed_light)); % (dB/km*M)
                               % conversion between HF conductivity and radar-attenuation rate based on Equations 9 and 10 in MacGregor et al. [2007, 2012]
                               % note that Equation 1 of MacGregor et al. [2012] assumes uS/m, but cond_atten_conv assumes S/m, following Equation 10 of MacGregor et al. [2007]
 
