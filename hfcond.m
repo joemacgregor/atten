@@ -57,8 +57,8 @@ function varargout          = hfcond(temp, H, Cl, NH4, vol_frac, hfcp, temp_unce
 %   
 %   See also HFCONDPROP and ATTEN.
 %   
-% Joe MacGregor, joemac@ig.utexas.edu
-% Last updated: 02/25/15
+% Joe MacGregor (joseph.a.macgregor@nasa.gov)
+% Last updated: 14 January 2025
 
 if ~any(nargin == [6 10])
     error('hfcond:nargin', 'Incorrect number of inputs (must be 6 or 10).')
@@ -156,8 +156,8 @@ if do_uncert
     % sum of each derivative from standard error propagation
     conduct_pure_uncert     = ((hfcp.conduct_pure_uncert ^ 2) .* exp_pure) + (((hfcp.activ_energy_pure_uncert * hfcp.conduct_pure) ^ 2) .* temp_k .* exp_pure);
     conduct_H_uncert        = (((H_uncert * hfcp.molar_conduct_H) .^ 2) .* exp_H) + (((hfcp.molar_conduct_H_uncert .* H) .^ 2) .* exp_H) + (((hfcp.activ_energy_H_uncert .* hfcp.molar_conduct_H .* H) .^ 2) .* temp_k .* exp_H);
-    conduct_Cl_uncert       = (((Cl_uncert * hfcp.molar_conduct_Cl) ^ 2) .* exp_Cl) + (((hfcp.molar_conduct_Cl_uncert .* Cl) .^ 2) .* exp_Cl) + (((hfcp.activ_energy_Cl_uncert .* hfcp.molar_conduct_Cl .* Cl) .^ 2) .* temp_k .* exp_Cl);
-    conduct_NH4_uncert      = (((NH4_uncert * hfcp.molar_conduct_NH4) ^ 2) .* exp_NH4) + (((hfcp.molar_conduct_NH4_uncert .* NH4) .^ 2) .* exp_NH4) + (((hfcp.activ_energy_NH4_uncert .* hfcp.molar_conduct_NH4 .* NH4) .^ 2) .* temp_k .* exp_NH4);
+    conduct_Cl_uncert       = (((Cl_uncert * hfcp.molar_conduct_Cl) .^ 2) .* exp_Cl) + (((hfcp.molar_conduct_Cl_uncert .* Cl) .^ 2) .* exp_Cl) + (((hfcp.activ_energy_Cl_uncert .* hfcp.molar_conduct_Cl .* Cl) .^ 2) .* temp_k .* exp_Cl);
+    conduct_NH4_uncert      = (((NH4_uncert * hfcp.molar_conduct_NH4) .^ 2) .* exp_NH4) + (((hfcp.molar_conduct_NH4_uncert .* NH4) .^ 2) .* exp_NH4) + (((hfcp.activ_energy_NH4_uncert .* hfcp.molar_conduct_NH4 .* NH4) .^ 2) .* temp_k .* exp_NH4);
     conduct_temp_pure_uncert= (temp_uncert .^ 2) .* (((((hfcp.conduct_pure * hfcp.activ_energy_pure) / boltzmann) ./ (temp .^ 2)) .^ 2) .* exp_pure);
     conduct_temp_imp_uncert = (temp_uncert .^ 2) .* ((((((hfcp.molar_conduct_H * hfcp.activ_energy_H) / boltzmann) .* (H ./ (temp .^ 2))) .^ 2) .* exp_H) + (((((hfcp.molar_conduct_Cl * hfcp.activ_energy_Cl) / boltzmann) .* (Cl ./ (temp .^ 2))) .^ 2) .* exp_Cl) + ...
                               (((((hfcp.molar_conduct_NH4 * hfcp.activ_energy_NH4) / boltzmann) .* (NH4 ./ (temp .^ 2))) .^ 2) .* exp_NH4));

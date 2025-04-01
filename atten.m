@@ -64,8 +64,8 @@ function varargout          = atten(thick, depth_inc, temp, H, Cl, NH4, vol_frac
 %   
 %   See also HFCOND, HFCONDPROP and LOOYENGA.
 % 
-% Joe MacGregor, joemac@ig.utexas.edu
-% Last updated: 03/25/15
+% Joe MacGregor (joseph.a.macgregor@nasa.gov)
+% Last updated: 14 January 2025
 
 if ~any(nargin == [8 9 13])
     error('atten:nargin', 'Incorrect number of inputs (must be 8, 9 or 13).')
@@ -131,8 +131,8 @@ if strcmp(return_type, 'uncert')
     if (~isnumeric(NH4_uncert) || ~isvector(NH4_uncert))
         error('atten:NH4_uncert', 'NH4_UNCERT must be a numeric vector.')
     end
-    if ~isequal(size(H), size(H_uncert), size(Cl_uncert), size(NH4_uncert))
-        error('atten:lengths_uncert', 'Lengths of TEMP_UNCERT, H_UNCERT, CL_UNCERT, NH4_UNCERT must be the same as H, CL and NH4.')
+    if ~isequal(size(H), size(temp_uncert), size(H_uncert), size(Cl_uncert), size(NH4_uncert))
+        error('atten:lengths_uncert', 'Lengths of TEMP_UNCERT, H_UNCERT, CL_UNCERT, NH4_UNCERT must be the same as TEMP, H, CL and NH4.')
     end
 end
 if (nargout > 2)
